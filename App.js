@@ -6,6 +6,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
  import HomeScreen from './src/screens/HomeScreen';
  import SideMenuScreen from './src/screens/SideMenuScreen';
  import SearchScreen from './src/screens/SearchScreen';
+ import DetailView from './src/components/DetailView';
 
 
  const Stack = createStackNavigator();
@@ -18,6 +19,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
     <MainStack.Navigator initialRouteName="Home" headerMode = "none">
       <MainStack.Screen name="Home" component={HomeScreen} />
       <MainStack.Screen name="Search" component={SearchScreen} />
+      <MainStack.Screen name="Detail" component={DetailView} />
     </MainStack.Navigator>
   );
 }

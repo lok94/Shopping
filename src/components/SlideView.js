@@ -22,13 +22,6 @@ const SlideView = ({ results }) => {
                             <Image
                                 style={styles.image}
                                 source={item.image } />
-                                {/* <View style = {{flexDirection: 'row', alignItems:'center'}}>
-                                <Image
-                                style={{width : scale(10), height : scale(10)}}
-                                source={require("../assets/pin.png") } />
-                                <Text>{item.distance} ({item.reviews} Reviews)</Text> 
-                                </View>
-                            <Text style = {{fontSize: scale(15), color : 'red'}}>{item.stars}</Text> */}
                         </TouchableOpacity>
                     );
                 }}

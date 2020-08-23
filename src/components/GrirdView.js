@@ -49,14 +49,17 @@ const GridView = () => {
                 <Image
                     style={styles.image}
                     source={item.image} />
-                <Text style={{ fontSize: scale(13), marginLeft: scale(10) }}>{item.name}</Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center',  marginLeft: scale(10) }}>
+                <Text style={styles.itemName}>{item.name}</Text>
+                <View style={styles.itemreview }>
                     <Image
                         style={{ width: scale(10), height: scale(10) }}
                         source={require("../assets/pin.png")} />
-                    <Text style={{ fontSize: scale(10) }}>{item.distance} ({item.reviews} Reviews)</Text>
+                    <Text 
+                        style={{ fontSize: scale(10) }}>
+                            {item.distance} ({item.reviews} Reviews)
+                    </Text>
                 </View>
-                <Text style={{ fontSize: scale(15), color: 'red', fontWeight: 'bold',  marginLeft: scale(10) }}>{item.stars}</Text>
+                <Text style={styles.stars}>{item.stars}</Text>
             </View>
         )
     }
@@ -101,6 +104,20 @@ const styles = StyleSheet.create({
     },
     text: {
         fontWeight: 'bold'
+    },
+    itemName : {
+        fontSize: scale(13), 
+        marginLeft: scale(10)
+    },
+    itemreview : {
+        fontSize: scale(13), 
+        marginLeft: scale(10)
+    },
+    stars  :{
+        fontSize: scale(15), 
+        color: 'red', 
+        fontWeight: 'bold',  
+        marginLeft: scale(10)
     }
 })
 

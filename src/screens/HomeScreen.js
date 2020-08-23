@@ -15,17 +15,11 @@ class HomeScreen extends Component {
           id: 1,
           name: "Kids Zone",
           image: require("../assets/kids-dress.png"),
-          stars: "* * * *",
-          reviews: 23,
-          distance: ' 1.3Km'
         },
         {
           id: 2,
           name: "Best Bakery",
           image: require("../assets/cake.png"),
-          stars: "* * *",
-          reviews: 13,
-          distance: '2.1Km'
         },
       ]
     }
@@ -57,7 +51,7 @@ class HomeScreen extends Component {
             onPress = { () => this.props.navigation.navigate("Search")}
             style = {{ flexDirection: 'row', padding: scale(10), alignItems: 'center'}}>
               <Image style={{ width: scale(10), height: scale(10) }} source={require("../assets/pin.png")} />
-              <Text style={{ color: '#95A5A6' }}>  Search by location</Text>
+              <Text style={{ color: '#95A5A6' }}>  Search by Name</Text>
             </TouchableOpacity>
 
 

@@ -1,67 +1,53 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { scale } from 'react-native-size-matters';
+import {dummyData} from '../components/Data';
 
 class SearchScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dummyData : [
-                {
-                    id: 1,
-                    name: "Kids Zone",
-                    image: require("../assets/kids-dress.png"),
-                    stars: "* * * *",
-                    reviews: 23,
-                    distance: ' 1.3Km'
-                  },
-                  {
-                    id: 2,
-                    name: "Best Bakery",
-                    image: require("../assets/cake.png"),
-                    stars: "* * *",
-                    reviews: 13,
-                    distance: '2.1Km'
-                  },
-    
-                  {
-                    id: 3,
-                    name: "Haldiram",
-                    image: require("../assets/chaat.jpg"),
-                    stars: "* * * *",
-                    reviews: 34,
-                    distance: ' 1.9Km'
-                },
-                {
-                    id: 4,
-                    name: "Raymonds",
-                    image: require("../assets/suits.jpg"),
-                    stars: "* * *",
-                    reviews: 16,
-                    distance: '1.5Km'
-                },
-                {
-                    id: 5,
-                    name: "FirstCry",
-                    image: require("../assets/kids-girl.jpg"),
-                    stars: "* * * *",
-                    reviews: 83,
-                    distance: '5.8Km'
-                },
-                {
-                    id: 4,
-                    name: "Travel",
-                    image: require("../assets/plane.jpg"),
-                    stars: "* * *",
-                    reviews: 73,
-                    distance: '20.1Km'
-                },
-            ]
+            text: '',
+            data: []
         }
+       
     }
+
+
+
+    searchData(text) {
+        const newData = dummyData.filter(item => {
+            if (item.name.toUpperCase().match(text.toUpperCase()))
+                return item;
+        });
+
+        if (!text || text === '') {
+            this.setState({
+                data: [],
+                text: text
+            })
+        } else {
+            this.setState({
+                data: newData,
+                text: text
+            })
+        }
+
+
+    }
+
+
+    itemSeparator = () => {
+        return (
+            <View style={{ borderColor: '#95A5A6', borderWidth: scale(1) }} />
+        )
+    }
+
+
+
     render() {
         return (
-            <View>
+            <View style={{ backgroundColor: '#fff', flex: 1 }}>
                 <View style={styles.container}>
                     <TouchableOpacity
                         onPress={() => this.props.navigation.goBack()}
@@ -72,13 +58,42 @@ class SearchScreen extends Component {
                         />
                     </TouchableOpacity>
                     <TextInput
-                        style={{ marginLeft: scale(20), flex: 1, }}
-                        placeholder="Search by Name and Location"
-                         
-                    />
-                </View>
+                        style={styles.textInput}
+                        onChangeText={(text) => this.searchData(text)}
+                        value={this.state.text}
+                        underlineColorAndroid='transparent'
+                        placeholder="Search by Name" />
 
-               
+
+
+                </View>
+                <View style={{ borderColor: '#95A5A6', borderWidth: scale(4) }} />
+
+                <FlatList
+
+                    data={this.state.data}
+                    keyExtractor={(item, index) => index.toString()}
+                    ItemSeparatorComponent={this.itemSeparator}
+                    renderItem={({ item }) => {
+                        return (
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate("Detail", {
+                                    id: item.id,
+                                    name: item.name,
+                                    image: item.image,
+                                    stars: item.stars,
+                                    reviews: item.reviews,
+                                    distance: item.distance
+                                })}>
+                                <Text style={styles.row}>{item.name}</Text>
+                            </TouchableOpacity>
+                        )
+                    }
+
+
+                    }
+                />
+
 
             </View>
         );
@@ -91,6 +106,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    textInput: {
+        flex: 1,
+        marginLeft: scale(15),
+        fontSize: scale(15)
+    },
+    row: {
+        padding: scale(10),
+        fontSize: scale(15)
     }
 })
 
